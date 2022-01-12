@@ -12,7 +12,13 @@ const app = express();
 // - the sub-route for the controller to handle
 // - the controller that should handle it
 // Read as a sentence: "For any route that starts with "/bookmarks", use the bookmarks controller."
+
+// JSON-parsing middleware
+// For every request, parse information as JSON
+app.use(express.json())
+
 app.use("/bookmarks", bookmarksController);
+
 
 // The home route.
 app.get("/", (request, response) => {
