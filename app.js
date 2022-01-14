@@ -3,6 +3,8 @@
 const bookmarksController = require("./controllers/bookmarksController");
 // DEPENDENCIES
 const express = require("express");
+const cors = require("cors");
+
 
 // Create the Express app.
 const app = express();
@@ -17,6 +19,8 @@ const app = express();
 // For every request, parse information as JSON
 app.use(express.json())
 
+app.use(cors());
+
 app.use("/bookmarks", bookmarksController);
 
 
@@ -30,6 +34,8 @@ app.get("/", (request, response) => {
 app.get("*", (request, response) => {
   response.status(404).json({ error: "Page not found" });
 });
+
+
 
 // Export our app for `server.js`.
 module.exports = app;

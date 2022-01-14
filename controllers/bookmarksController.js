@@ -1,6 +1,6 @@
 // bookmarksController.js
 // Dependencies
-const { response } = require("express");
+
 const express = require("express");
 const { request } = require("../app");
 // Files
@@ -58,6 +58,28 @@ bookmarks.post("/", (request, response) => {
   response.status(201).json(bookmarksArray);
   // response.send(request.body);
 });
+
+
+// DELETE
+bookmarks.delete("/:index",(request,response) => {
+  const { index } = request.params;
+  if(bookmarksArray[index]){
+    const [ deletedBookmark ] = bookmarksArray.splice(index, 1);
+    response.status(200).json(deletedBookmark);
+  } else {
+    response.status(404).json({ error: 'Bookmark not found' })
+  };
+});
+
+// UPDATE
+bookmarks.put("/:index", (request, response) => {
+  // bookmarksArray[request.params.index] = request.body;
+  bookmarksArray.splice(request.params.index, 1, request.body )
+  response.status(200).json(bookmarksArray);
+});
+
+
+
 
 // YOUR TASK:
 // finish this post request!
